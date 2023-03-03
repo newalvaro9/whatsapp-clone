@@ -6,7 +6,7 @@ export default function Login({ error }: { error?: string }) {
 
     const closeErr = () => {
         if(typeof document != undefined) {
-            document!.getElementById('closebtn')!.parentElement!.style!.display = 'none'
+            document!.getElementById('clsbtn')!.style.display = 'none'
         }
     }
     return (
@@ -18,7 +18,7 @@ export default function Login({ error }: { error?: string }) {
 
                         {error ? (
                             <div className="alert">
-                                <span id="closebtn" className="closebtn" onClick={closeErr}>&times;</span>
+                                <span className="closebtn" onClick={closeErr}>&times;</span>
                                 {error}
                             </div>
                         ) : <></>
@@ -29,7 +29,7 @@ export default function Login({ error }: { error?: string }) {
 
                             <div className={styles["form-group"]}>
                                 <label className="label" htmlFor="username">
-                                    Username
+                                    Telephone
                                 </label>
                                 <input className={styles["username-input"]} type="text" name="username" required />
                             </div>

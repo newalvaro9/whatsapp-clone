@@ -1,12 +1,13 @@
 import Layout from "@/components/layout";
 import styles from "@/styles/Login.module.css"
 import buttons from "@/styles/Buttons.module.css"
+import Script from "next/script";
 
 export default function Login({ username, error }: { username?: string, error?: string }) {
 
     const closeErr = () => {
         if (typeof document != undefined) {
-            document.getElementById('closebtn')!.parentElement!.style.display = 'none'
+            document.getElementById('clsbtn')!.style.display = 'none'
         }
     }
     return (
@@ -17,7 +18,7 @@ export default function Login({ username, error }: { username?: string, error?: 
                         <h2 style={{ "textAlign": "center", "color": "#eff3f5" }}>Log in to continue</h2>
 
                         {error ? (
-                            <div className="alert">
+                            <div className="alert" id="clsbtn">
                                 <span className="closebtn" onClick={closeErr}>&times;</span>
                                 {error}
                             </div>
@@ -29,11 +30,10 @@ export default function Login({ username, error }: { username?: string, error?: 
 
                             <div className={styles["form-group"]}>
                                 <label className="label" htmlFor="username">
-                                    Username
+                                    Telephone number
                                 </label>
-                                <input className={styles["username-input"]} type="text" name="username" defaultValue={username} required />
+                                <input className={styles["username-input"]} type="tel" id="telephone" name="telephone" defaultValue={username} required />
                             </div>
-
                             <div className={styles["form-group"]}>
                                 <label className="label" htmlFor="password">
                                     Password
@@ -46,6 +46,7 @@ export default function Login({ username, error }: { username?: string, error?: 
                     </div>
                 </div>
             </form>
+            <Script src="/js/script.js"></Script>
         </Layout>
     )
 }
