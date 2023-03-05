@@ -2,13 +2,14 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import * as dotenv from 'dotenv'
 import { sign } from "jsonwebtoken";
-import { serialize } from "cookie";
 import bcrypt from 'bcrypt'
 import connect from "../../../lib/database/database";
 import db from "../../../lib/database/models/users";
+import { setCookie } from 'cookies-next';
 
 export default async function (req: NextApiRequest, res: NextApiResponse) {
     if (req.method !== 'POST') return res.redirect('http://localhost:3000/login')
+
     const { username, password }: { username: string, password: string } = req.body;
 
     await connect();
@@ -26,7 +27,8 @@ export default async function (req: NextApiRequest, res: NextApiResponse) {
             process.env.JWT_SECRET as string
         );
 
-        const serialised = serialize("sessionId", token, {
+        setCookie("sessionId", token, {
+            req, res,
             httpOnly: true,
             secure: process.env.NODE_ENV !== "development",
             sameSite: "strict",
@@ -34,10 +36,8 @@ export default async function (req: NextApiRequest, res: NextApiResponse) {
             path: "/",
         });
 
-        res.setHeader("Set-Cookie", serialised);
-
         res.redirect("http://localhost:3000/chats")
     } else {
-        res.redirect(`http://localhost:3000/login?user=${username}&error=${"Invalid+credentials%21"}`)
+        res.redirect(`http://localhost:3000/login?user=${username}&error=Invalid+credentials%21`)
     }
 }

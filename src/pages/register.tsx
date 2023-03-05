@@ -2,7 +2,7 @@ import Layout from "@/components/layout";
 import styles from "@/styles/Login.module.css"
 import buttons from "@/styles/Buttons.module.css"
 
-export default function Login({ error }: { error?: string }) {
+export default function Register({ error }: { error?: string }) {
 
     const closeErr = () => {
         if(typeof document != undefined) {
@@ -11,7 +11,7 @@ export default function Login({ error }: { error?: string }) {
     }
     return (
         <Layout title={"Register - Whatsapp clone"}>
-            <form action="/api/login" method="POST">
+            <form action="/api/register" method="POST">
                 <div className={styles["up-login-card"]}>
                     <div className={styles["login-card"]}>
                         <h2 style={{ "textAlign": "center", "color": "#eff3f5" }}>Register a new account</h2>
@@ -29,7 +29,7 @@ export default function Login({ error }: { error?: string }) {
 
                             <div className={styles["form-group"]}>
                                 <label className="label" htmlFor="username">
-                                    Telephone
+                                    Username
                                 </label>
                                 <input className={styles["username-input"]} type="text" name="username" required />
                             </div>
@@ -57,8 +57,9 @@ export default function Login({ error }: { error?: string }) {
     )
 }
 
-Login.getInitialProps = async function (ctx: { query: { error?: string; }; }) {
+Register.getInitialProps = async function (ctx: { query: { user?: string; error?: string; }; }) {
     return {
+        username: ctx.query.user ? ctx.query.user : undefined,
         error: ctx.query.error ? ctx.query.error : undefined
     }
 }

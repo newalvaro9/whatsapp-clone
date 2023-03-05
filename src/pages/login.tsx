@@ -30,9 +30,9 @@ export default function Login({ username, error }: { username?: string, error?: 
 
                             <div className={styles["form-group"]}>
                                 <label className="label" htmlFor="username">
-                                    Telephone number
+                                    Username
                                 </label>
-                                <input className={styles["username-input"]} type="tel" id="telephone" name="telephone" defaultValue={username} required />
+                                <input className={styles["username-input"]} id="username" name="username" defaultValue={username} required />
                             </div>
                             <div className={styles["form-group"]}>
                                 <label className="label" htmlFor="password">
@@ -46,7 +46,6 @@ export default function Login({ username, error }: { username?: string, error?: 
                     </div>
                 </div>
             </form>
-            <Script src="/js/script.js"></Script>
         </Layout>
     )
 }
