@@ -1,5 +1,7 @@
 import NextAuth from "next-auth"
 import GoogleProvider from "next-auth/providers/google"
+import connect from "../../../../lib/database/connect"
+import UsersDB from "../../../../lib/database/models/users"
 
 export const authOptions = {
     // Configure one or more authentication providers
@@ -14,6 +16,12 @@ export const authOptions = {
         async signIn({ account, profile }: any) {
             console.log(account)
             console.log(profile);
+            connect();
+            if (!UsersDB.findOne({ email: profile.email })) {
+                UsersDB.create({ email: profile.email, name: profile.name, avatar: profile.picture })
+            }
+
+            return true
         }
     },
     pages: {
