@@ -10,20 +10,21 @@ import styles from '@/styles/Chats.module.css';
 type Chat = { name: string, email: string, lastMessage: string, image: string };
 type Chats = Array<Chat>;
 
-export default function Home({ chats }: { chats: Chats }) {
-  const [results, setResults] = useState<Array<string>>([]);
+export default function Home({ chats, all }: { chats: Chats, all: Chats }) {
+  const [results, setResults] = useState<any>([]);
   const refTerm = useRef<any>('');
-  const arr = ["Juan Alberto", "Miguel Rufas", "Alvaro Poblador"];
 
   const handleInputChange = () => {
     if (!refTerm.current.value) return setResults([]);
 
-    const filteredResults = arr.filter((element) =>
-      element.toLowerCase().includes(refTerm.current.value.toLowerCase())
+    const filteredResults = all.filter((element) =>
+      element.name.toLowerCase().includes(refTerm.current.value.toLowerCase())
     );
     console.log(filteredResults)
     setResults(filteredResults);
   };
+  console.log(chats)
+  console.log(all)
 
   return (
     <Layout>
@@ -33,18 +34,21 @@ export default function Home({ chats }: { chats: Chats }) {
           <div className={styles['wrapchats']}>
             <div className={styles['sidebarchats']}>
               <div>
-                <input type="text" placeholder="Enter a search term..." ref={refTerm} onChange={handleInputChange} />
+                <input type="text" placeholder="Start new chat with..." ref={refTerm} onChange={handleInputChange} />
 
                 {
-                  <ul className={styles['result-list']}>
-                    {results.map((result: string) => (
-                      <li key={result}>{result}</li>
-                    ))}
-                  </ul>
+                  results.map((chat: Chat, index: number) => (
+                    <div key={index} className={styles['chat']}>
+                      <img src={chat.image}></img>
+                      <div className={styles['chattxtinfo']}>
+                        <h4>{chat.name}</h4>
+                      </div>
+                    </div>
+                  ))
                 }
               </div>
 
-              {
+              {   
                 chats.map((chat: Chat, index: number) => (
                   <div key={index} className={styles['chat']}>
                     <img src={chat.image}></img>
@@ -52,7 +56,7 @@ export default function Home({ chats }: { chats: Chats }) {
                       <h4>{chat.name}</h4>
                       <p>{chat.lastMessage}</p>
                     </div>
-                  </div>
+                  </div>  
                 ))
               }
             </div>
@@ -81,7 +85,10 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
       email: "vfxalv@gmail.com",
       image: "https://i.pinimg.com/236x/9e/40/74/9e4074bbe7890cd245b51b9ff5c0e33c.jpg",
       lastMessage: "See you soon"
-    },
+    }
+  ]
+
+  const all: Chats = [
     {
       name: "Juan",
       email: "test@gmail.com",
@@ -97,6 +104,6 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   ]
 
   return {
-    props: { chats }
+    props: { chats, all }
   }
 }

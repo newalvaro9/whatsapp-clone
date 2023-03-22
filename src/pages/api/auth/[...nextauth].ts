@@ -14,7 +14,6 @@ export const authOptions = {
     ],
     callbacks: {
         async signIn({ account, profile }: any) {
-            console.log(account)
             console.log(profile);
             connect();
             if (!UsersDB.findOne({ email: profile.email })) {

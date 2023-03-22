@@ -23,6 +23,22 @@
     border: 2px solid black;
 }
 
+.sidebarchats input {
+    background-color: #EDE9D5;
+    border: none;
+    border-radius: 10px;
+    width: calc(100% - 10px);
+    margin: 5px;
+    height: 30px;
+}
+
+.result-list {
+    list-style: none;
+    padding: 0;
+}
+
+.result-list li {}
+
 .currentchat {
     width: 600px;
     height: 450px;
@@ -58,8 +74,4 @@
     font-size: 14px;
     margin: 0;
     color: rgb(0, 0, 0, 0.6)
-}
-
-.result-list {
-    list-style: none;
 }
