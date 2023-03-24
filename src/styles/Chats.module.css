@@ -37,15 +37,6 @@
     padding: 0;
 }
 
-.result-list li {}
-
-.currentchat {
-    width: 600px;
-    height: 450px;
-    border: 2px solid black;
-    border-left: none;
-}
-
 .chat {
     display: flex;
     justify-content: flex-start;
@@ -74,4 +65,40 @@
     font-size: 14px;
     margin: 0;
     color: rgb(0, 0, 0, 0.6)
+}
+
+.currentchat {
+    width: 600px;
+    height: 450px;
+    border: 2px solid black;
+    border-left: none;
+}
+
+.viewer {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.sendinput {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    align-self: flex-end;
+}
+
+.sendinput input {
+    background-color: #EDE9D5;
+    border: none;
+    border-radius: 10px;
+    width: calc(100% - 10px);
+    margin: 5px;
+    height: 30px;
+}
+
+.sendicon   {
+    height: 30px;
+    width: auto;
+    margin: 0 5px 0 5px
 }
