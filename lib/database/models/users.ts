@@ -13,20 +13,8 @@ const Users = new mongoose.Schema({
         type: String,
         required: true
     },
-    chat: {
-        type:
-            [
-                {
-                    name: String,
-                    email: String,
-                    messages: {
-                        author: String,
-                        message: String
-                    }
-                }
-            ],
-        required: true
+    lastMessage: {
+        type: String
     }
-
 })
 export default mongoose.models.Users || mongoose.model('Users', Users)
